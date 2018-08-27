@@ -17,16 +17,18 @@ public class CSVReader {
 
     public String[][] cities = {{"", "", "", "", ""}};				// erstellt Array {Stadtname, x Koordinate, y Koordinate, Level}
 	
-	public CSVReader(String region, int level) {
+	public CSVReader(String region, int level) throws ClassNotFoundException {
 
-    	String csvFile = "";															
+    	InputStream csvFile;															
     	switch (region) {																	// Switch für Kartenauswahl
 	        case " - Deutschland ":															// CSV-Datei mit Namen+Koordinaten+Level GER
-	        	csvFile = SwingMain.userDir +  "\\src\\org\\geom\\swing\\KoorGER.csv"; 		
+	        	csvFile = SwingMain.class.getResourceAsStream("KoorGER.csv"); 		
 	        	break;
 	        case " - Europa ":																// CSV-Datei mit Namen+Koordinaten+Level EU
-	        	csvFile = SwingMain.userDir + "\\src\\org\\geom\\swing\\KoorEUR.csv";		
+	        	csvFile = SwingMain.class.getResourceAsStream("KoorEUR.csv");		
 	        	break;
+	        default :
+	        	throw new ClassNotFoundException("Selected CSV-content not found");
         }
     	
         String line = "";
@@ -37,9 +39,11 @@ public class CSVReader {
         
         
         
-        try (InputStream is = new FileInputStream(csvFile); //input csvFile-content as bitstream
-             InputStreamReader isr = new InputStreamReader(is, StandardCharsets.ISO_8859_1);	//read bitstream as (one) string with encoding-standard ISO...
+        try (
+             InputStreamReader isr = new InputStreamReader(csvFile, StandardCharsets.ISO_8859_1);	//read bitstream as (one) string with encoding-standard ISO...
         	 BufferedReader br = new BufferedReader(isr)) {	//split string line by line (see ) 
+        	//catch (IOException e) {System.out.println("CSV error");};
+        	
         	int counter = 0;
             while ((line = br.readLine()) != null) {
             	

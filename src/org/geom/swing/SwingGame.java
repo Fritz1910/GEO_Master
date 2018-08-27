@@ -44,8 +44,8 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	private boolean gameHasStarted = false;
 	private boolean nextRound = true;
 	
-	public JLabel markerBlue = new JLabel(new ImageIcon(SwingMain.userDir + "\\src\\org\\geom\\swing\\Marker_Blue.png"));		// Such-Marker
-	public JLabel markerRed = new JLabel(new ImageIcon(SwingMain.userDir + "\\src\\org\\geom\\swing\\Marker_Red.png"));			// Ziel-Marker
+	public JLabel markerBlue = new JLabel(new ImageIcon(SwingMain.class.getResource("Marker_Blue.png")));		// Such-Marker
+	public JLabel markerRed = new JLabel(new ImageIcon(SwingMain.class.getResource("Marker_Red.png")));			// Ziel-Marker
 		
 	public JButton mainmenuButton;										// "MainMenü" Button Initialisierung
 	public JButton beendenButton;										// "Beenden" Button Initialisierung
@@ -216,7 +216,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 			
 		        
 		
-	public SwingGame(String karte, int level) {
+	public SwingGame(String karte, int level) throws ClassNotFoundException {
 		SwingMain.toolkitForWindow = Toolkit.getDefaultToolkit();		
 		
 		Dimension d =SwingMain.toolkitForWindow.getScreenSize();		// Informationen über Desktopauflösung werden aberufen
@@ -239,10 +239,10 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	    setLayout(new BorderLayout());					// Layout für Hintergrund			
 		switch (karte) {								// Switch für Kartenauswahl, Abgleich mit Auswahl in ComboBox im Hauptmenü
 			case " - Deutschland ":	
-				background = new JLabel(new ImageIcon(SwingMain.userDir + "\\src\\org\\geom\\swing\\GameBackroundGER_1400x870.png"));
+				background = new JLabel(new ImageIcon(getClass().getResource("GameBackroundGER_1400x870.png")));
 				break;
 			case " - Europa ":
-				background = new JLabel(new ImageIcon(SwingMain.userDir + "\\src\\org\\geom\\swing\\GameBackroundEUR_1400x870.png"));
+				background = new JLabel(new ImageIcon(getClass().getResource("GameBackroundEUR_1400x870.png")));
 				break;
 		}
 	    

@@ -104,7 +104,13 @@ public class SwingMain extends javax.swing.JFrame {
 			    	
 			    	System.out.println (levelnr);						// Kontrolle..
 			    	
-					final SwingGame ga = new SwingGame (karte, levelnr);		// Klasse des Spielfensters
+					SwingGame ga = null;
+					try {
+						ga = new SwingGame (karte, levelnr);
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}		// Klasse des Spielfensters
 					ga.setVisible(true);								// Fenster wird sichtbar
 					dispose ();											// altes Fenster geschlossen					
 			      	
