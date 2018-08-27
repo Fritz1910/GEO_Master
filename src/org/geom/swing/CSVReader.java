@@ -5,8 +5,13 @@ package org.geom.swing;
 
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 
 public class CSVReader {
 
@@ -28,7 +33,13 @@ public class CSVReader {
         String cvsSplitBy = ";";														// Benutzt ";" als Seperator
         String[][] cities = {{"", "", "", "", ""}};											// erstellt Array {Stadtname, x Koordinate, y Koordinate, Level, Verhälnis px:km}
 
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+       
+        
+        
+        
+        try (InputStream is = new FileInputStream(csvFile); //input csvFile-content as bitstream
+             InputStreamReader isr = new InputStreamReader(is, StandardCharsets.ISO_8859_1);	//read bitstream as (one) string with encoding-standard ISO...
+        	 BufferedReader br = new BufferedReader(isr)) {	//split string line by line (see ) 
         	int counter = 0;
             while ((line = br.readLine()) != null) {
             	

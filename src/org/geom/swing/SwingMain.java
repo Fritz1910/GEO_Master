@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -36,8 +37,9 @@ public class SwingMain extends javax.swing.JFrame {
 	
 	public JOptionPane noSelection = new JOptionPane();
 
-	public static ImageIcon iconGeoMaster = new ImageIcon(userDir + "/src/org/geom/swing/Logo_v1.1_319x295.png");
-	public static ImageIcon iconGeoMasterDialog = new ImageIcon(userDir + "/src/org/geom/swing/Logo_v1.1_50x45.png");
+	public static ImageIcon iconGeoMaster = new ImageIcon(SwingMain.class.getResource("Logo_v1.1_319x295.png"));
+	public static ImageIcon iconGeoMasterDialog = new ImageIcon(SwingMain.class.getResource("Logo_v1.1_50x45.png"));
+	
 	
 	public SwingMain() {
 				
@@ -51,12 +53,12 @@ public class SwingMain extends javax.swing.JFrame {
 	    System.out.println(userDir);
 	    
 	    setLayout(new BorderLayout());									// Layout für Hintergrund			
-		JLabel background=new JLabel(new ImageIcon(userDir + "/src/org/geom/swing/Background_1400x900.jpg"));
+		JLabel background=new JLabel(new ImageIcon(getClass().getResource("Background_1400x900.jpg")));
 		add(background);												// Hintergrund einfügen
 		background.setLayout(null);										// Layout für weitere Elemente
 		
 		
-		JComboBox karteAuswahl = new JComboBox(comboBoxKarte);			// JComboBox Karte wird erstellt
+		JComboBox<String> karteAuswahl = new JComboBox<>(comboBoxKarte);			// JComboBox Karte wird erstellt
 		background.add(karteAuswahl);									// JComboBox Karte wird backround hinzugefügt
 		karteAuswahl.setBounds(590, 600, 220, 30);						// Position und Größe der Kartenauswahl
 		
