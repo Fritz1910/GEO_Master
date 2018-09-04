@@ -28,8 +28,8 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	public int  x = 0 , y = 0 , width = 1400, height = 900;				// Fenster-Variablen
 	public int numberOfRounds = 10;
 	public int currentRound = 1;
-	public int xKoor = 0;												// Variable x für Berechnug
-	public int yKoor = 0;												// Variable y für Berechnug
+	public int xKoor = 0;												// Variable x fï¿½r Berechnug
+	public int yKoor = 0;												// Variable y fï¿½r Berechnug
 	public int deltax = 0;
 	public int deltay =0;												// Hilfsvariablen zu Berechnung der Entfernung (px)
 	public int  distancepx = 0;											// Variable zur Berechnung der Entfernung in px
@@ -37,26 +37,26 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	public int score = 0;												// Punktzahl der einzelnen Runden
 	public int scoreTotal = 0;											// Summe der Punkte der einzelnen Runden
 	public int scoreMax = 0;											// Summe der maximal erreichbaren Punkte
-	public int toleranz = 2; 											// Toleranzbereich in px (Radius) für Berechnung der Punkte
+	public int toleranz = 2; 											// Toleranzbereich in px (Radius) fï¿½r Berechnung der Punkte
 	private int[] usedNumbers = new int[numberOfRounds];
 	
-	private boolean hasNotClicked = true;								// Hilfsvariable Mausklick wurde für Berechnung
+	private boolean hasNotClicked = true;								// Hilfsvariable Mausklick wurde fï¿½r Berechnung
 	private boolean gameHasStarted = false;
 	private boolean nextRound = true;
 	
 	public JLabel markerBlue = new JLabel(new ImageIcon(SwingMain.class.getResource("Marker_Blue.png")));		// Such-Marker
 	public JLabel markerRed = new JLabel(new ImageIcon(SwingMain.class.getResource("Marker_Red.png")));			// Ziel-Marker
 		
-	public JButton mainmenuButton;										// "MainMenü" Button Initialisierung
+	public JButton mainmenuButton;										// "MainMenï¿½" Button Initialisierung
 	public JButton beendenButton;										// "Beenden" Button Initialisierung
-	public JButton checkButton;											// "Spiel" Button zu Durchführen verschiedener Aktionen im Spielverlauf 
+	public JButton checkButton;											// "Spiel" Button zu Durchfï¿½hren verschiedener Aktionen im Spielverlauf 
 	
 	public JTextPane gameDataQuestionNumber = new JTextPane();			// TextBox Ausgabe Frage Nummer
 	public JTextPane gameDataQuestion = new JTextPane();				// TextBox Ausgabe Frage
 	public JTextPane gameDataEvaluationDistance = new JTextPane();		// TextBox Ausgabe Entfernung
 	public JTextPane gameDataEvaluationScore = new JTextPane();			// TextBox Ausgabe Punkte
 	
-	public JOptionPane finalEvaluation = new JOptionPane();				// DialogFEnster für Gesamtauswertung
+	public JOptionPane finalEvaluation = new JOptionPane();				// DialogFEnster fï¿½r Gesamtauswertung
 		
 	Font font = new Font("Arial", Font.PLAIN, 16);
 	   
@@ -65,27 +65,29 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	
 	private void fillUsedNumberArrayWithDefault() {
 		for (int index = 0; index < this.numberOfRounds; index++) {
-			this.usedNumbers[index] = -1; 								// Array für benutze Städte aus Liste 
+			this.usedNumbers[index] = -1; 								// Array fï¿½r benutze Stï¿½dte aus Liste 
 		}
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {							//  Methode Maus wurde gedrückt und wieder losgelassen
-		int x = e.getX();
-		int y = e.getY();
-		System.out.println("Mouse Clicked at X: " + x + " - Y: " + y);
-		this.xKoor = x;													// Werte werden übergeben
-		this.yKoor = y;
-		if (checkButton.getText() != "Nächste Runde") {					// prüft Rundenfortschritt
-			if (hasNotClicked) {										// Verhinderung von Mehrfachdrücken
-				this.hasNotClicked = false;								
-				if ( gameHasStarted) {									// prüft ob Spiel gestartet
-					this.markerBlue.setVisible(true);					
-					this.markerBlue.setLocation(x - 13, y - 43);		// Such-Marker wird auf die geklickte Position gesetzt
+	public void mouseClicked(MouseEvent e) {							//  Methode Maus wurde gedrï¿½ckt und wieder losgelassen
+			if (e.getX() < 1000) {										// Marker kann nur auÃŸerhalb der "Spielleiste" gesetzt werden.
+				int x = e.getX();
+				int y = e.getY();
+				System.out.println("Mouse Clicked at X: " + x + " - Y: " + y);
+				this.xKoor = x;													// Werte werden ï¿½bergeben
+				this.yKoor = y;
+				if (checkButton.getText() != "Nï¿½chste Runde") {					// prï¿½ft Rundenfortschritt
+					if (hasNotClicked) {										// Verhinderung von Mehrfachdrï¿½cken
+						this.hasNotClicked = false;								
+						if ( gameHasStarted) {									// prï¿½ft ob Spiel gestartet
+							this.markerBlue.setVisible(true);					
+							this.markerBlue.setLocation(x - 13, y - 43);		// Such-Marker wird auf die geklickte Position gesetzt
+						}
+					} else {
+						this.markerBlue.setLocation(x - 13, y - 43);			// Such-Marker wird auf die geklickte Position gesetzt
+					}
 				}
-			} else {
-				this.markerBlue.setLocation(x - 13, y - 43);			// Such-Marker wird auf die geklickte Position gesetzt
-			}
 		}
 	}
 	
@@ -96,13 +98,13 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
         //System.out.println("Mouse Entered at X: " + x + " - Y: " + y);
 	}
 	@Override
-	public void mouseExited(MouseEvent e) { 							// Methode Maus verlässt den Clientbereich
+	public void mouseExited(MouseEvent e) { 							// Methode Maus verlï¿½sst den Clientbereich
         //int x = e.getX();
         //int y = e.getY();
         //System.out.println("Mouse Exited at X: " + x + " - Y: " + y);
 	}
 	@Override
-	public void mousePressed(MouseEvent e) { 							// Methode Maustaste wurde gedrückt
+	public void mousePressed(MouseEvent e) { 							// Methode Maustaste wurde gedrï¿½ckt
 		//int x = e.getX();
         //int y = e.getY();
 		//System.out.println("Mouse Pressed at X: " + x + " - Y: " + y);
@@ -126,7 +128,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		
 		System.out.println("Frage " + roundString + ": ");
 		System.out.println("Wo befindet sich " + cities[usedNumbers[currentRound - 1]][0] + "?");
-		System.out.println("Bitte Position wählen!");
+		System.out.println("Bitte Position wï¿½hlen!");
 		
 		hasNotClicked = true;
 	}
@@ -150,7 +152,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		
 		// Berechnung Punkte
 		if (distancepx <= toleranz) {					// Einbeziehung des Toleranzbereichs in die Punkteberechnung
-			score = 100;								// maximal Punktzahl wird durch die Toleranz nicht erhöht				
+			score = 100;								// maximal Punktzahl wird durch die Toleranz nicht erhï¿½ht				
 		} else {
 			score = 100 + toleranz - distancepx;
 		}
@@ -162,7 +164,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		scoreMax = scoreMax + 100;						// Brechnung der maximal erreichbaren Punkte
 		
 		// Ausgabe der Entfernung & Punkte in Textbox 
-		gameDataEvaluationDistance.setText("\n Die Entfernung beträgt: " + distancekm + " km");
+		gameDataEvaluationDistance.setText("\n Die Entfernung betrï¿½gt: " + distancekm + " km");
 		gameDataEvaluationScore.setText(" Diese Runde: " + score + " / 100 Punkte \n Insgesammt:  " + scoreTotal + " / " + scoreMax + " Punkte");
 		
 		System.out.println(distancepx + " px");		
@@ -173,7 +175,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		
 	}
 	
-	// Gesamtauswertung am Ende der letzten Runde, Ausgabe über Dialog-Fenster, Wechsel auf Hauptmenü-Fenster
+	// Gesamtauswertung am Ende der letzten Runde, Ausgabe ï¿½ber Dialog-Fenster, Wechsel auf Hauptmenï¿½-Fenster
 	public void auswertung() {										
 		
 		gameHasStarted = false;										// Variable wird auf faslch gesetzt, da das Spiel beendet ist
@@ -181,24 +183,24 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		markerRed.setVisible(false);
 		
 		// Ausgabe Dialog Spielauswertung 
-		finalEvaluation.showMessageDialog(null, "\n Spiel beendet! " + scoreTotal + " von " + scoreMax + " möglichen Punkten \n ", "Auswertung", JOptionPane.INFORMATION_MESSAGE, SwingMain.iconGeoMasterDialog);
-		System.out.println("Spiel beendet! \" + scoreTotal + \" von \" + scoreMax + \" möglichen Punkten");
+		finalEvaluation.showMessageDialog(null, "\n Spiel beendet! " + scoreTotal + " von " + scoreMax + " mï¿½glichen Punkten \n ", "Auswertung", JOptionPane.INFORMATION_MESSAGE, SwingMain.iconGeoMasterDialog);
+		System.out.println("Spiel beendet! \" + scoreTotal + \" von \" + scoreMax + \" mï¿½glichen Punkten");
 		
-		// zurück zum Hauptmenü
-		final SwingMain swingMain = new SwingMain ();				// Klasse des Hauptmenüs
+		// zurï¿½ck zum Hauptmenï¿½
+		final SwingMain swingMain = new SwingMain ();				// Klasse des Hauptmenï¿½s
 		swingMain.setVisible(true);									// Klasse wird sichtbar gemacht
 		dispose ();													// aktuelles Fenster wird geschlossen
 	}
 	
-	// Datensätze aus CityArray zufällig auswählen  
+	// Datensï¿½tze aus CityArray zufï¿½llig auswï¿½hlen  
 	public void setEntryNumber(int round, String[][] cities) {
 		
 		Random rNumber = new Random(); 								// neues Random Objekt, namens zufall
-		int randomNumber = rNumber.nextInt(cities.length); 			// Ganzahlige Zufallszahl zw. 0 & der Array Länge
+		int randomNumber = rNumber.nextInt(cities.length); 			// Ganzahlige Zufallszahl zw. 0 & der Array Lï¿½nge
 		
 		boolean wasNotEqual = true;									// Variable "NochNichtBenutzt"
 		while (wasNotEqual) {
-			randomNumber = rNumber.nextInt(cities.length); 			// Ganzahlige Zufallszahl zw. 0 & der Array Länge
+			randomNumber = rNumber.nextInt(cities.length); 			// Ganzahlige Zufallszahl zw. 0 & der Array Lï¿½nge
 			
 			for (int usedNumberIndex = 0; usedNumberIndex < numberOfRounds ; usedNumberIndex++) {
 				if (usedNumbers[usedNumberIndex] == randomNumber) {
@@ -219,8 +221,8 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	public SwingGame(String karte, int level) throws ClassNotFoundException {
 		SwingMain.toolkitForWindow = Toolkit.getDefaultToolkit();		
 		
-		Dimension d =SwingMain.toolkitForWindow.getScreenSize();		// Informationen über Desktopauflösung werden aberufen
-		x = (int) ((d.getWidth() - width) / 2);							// Berechnung: Fenster soll zentriertauf Desktop geöffnet werden
+		Dimension d =SwingMain.toolkitForWindow.getScreenSize();		// Informationen ï¿½ber Desktopauflï¿½sung werden aberufen
+		x = (int) ((d.getWidth() - width) / 2);							// Berechnung: Fenster soll zentriertauf Desktop geï¿½ffnet werden
 		y = (int) ((d.getHeight() - height)  / 2);
 		
 		CSVReader daten = new CSVReader(karte, level);					// Spieldaten vom CSVReader "abgerufen"
@@ -233,11 +235,11 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	    }
 		
 		setTitle ("GEO Master");						// "FensterName"
-	    setBounds(x, y, width, height);					// Fenstergröße & -position
+	    setBounds(x, y, width, height);					// Fenstergrï¿½ï¿½e & -position
 
 	    JLabel background = new JLabel();				// Hintergrund wird definiert
-	    setLayout(new BorderLayout());					// Layout für Hintergrund			
-		switch (karte) {								// Switch für Kartenauswahl, Abgleich mit Auswahl in ComboBox im Hauptmenü
+	    setLayout(new BorderLayout());					// Layout fï¿½r Hintergrund			
+		switch (karte) {								// Switch fï¿½r Kartenauswahl, Abgleich mit Auswahl in ComboBox im Hauptmenï¿½
 			case " - Deutschland ":	
 				background = new JLabel(new ImageIcon(getClass().getResource("GameBackroundGER_1400x870.png")));
 				break;
@@ -246,8 +248,8 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 				break;
 		}
 	    
-		add(background);							// Hintergrund einfügen
-		background.setLayout(null);					// Layout für weitere Elemente "null", alle Elemente müssen manuell positioniert werden 
+		add(background);							// Hintergrund einfï¿½gen
+		background.setLayout(null);					// Layout fï¿½r weitere Elemente "null", alle Elemente mï¿½ssen manuell positioniert werden 
 	    
 		
 		background.add(markerBlue);					// Such-Marker
@@ -258,30 +260,30 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		markerRed.setBounds(0,0,27,43);
 		markerRed.setVisible(false);				// soll vorerst noch nicht sichtbar sein
 		
-		gameDataQuestionNumber.setBounds(1060, 350, 300, 30);			// Textfeld Ausgabe FrageNummer - Position & Größe
+		gameDataQuestionNumber.setBounds(1060, 350, 300, 30);			// Textfeld Ausgabe FrageNummer - Position & Grï¿½ï¿½e
 		gameDataQuestionNumber.setText("");								// soll vorerst leer sein
-		gameDataQuestionNumber.setFont(font);							// Schriftart & Größe wird aus bereits definierter font Variable übernommen
+		gameDataQuestionNumber.setFont(font);							// Schriftart & Grï¿½ï¿½e wird aus bereits definierter font Variable ï¿½bernommen
 		gameDataQuestionNumber.setBackground(getForeground());			// Hintergrundfarbe der Textbox
 		gameDataQuestionNumber.setEditable(false);						// Box ist nicht beschreibbar
 		background.add(gameDataQuestionNumber);							
 				
-		gameDataQuestion.setBounds(1060, 380, 300, 50);					// Textfeld Ausgabe Frage - Position & Größe
+		gameDataQuestion.setBounds(1060, 380, 300, 50);					// Textfeld Ausgabe Frage - Position & Grï¿½ï¿½e
 		gameDataQuestion.setText("");									// soll vorerst leer sein
-		gameDataQuestion.setFont(font);									// Schriftart & Größe wird aus bereits definierter font Variable übernommen
+		gameDataQuestion.setFont(font);									// Schriftart & Grï¿½ï¿½e wird aus bereits definierter font Variable ï¿½bernommen
 		gameDataQuestion.setBackground(getForeground());				// Hintergrundfarbe der Textbox
 		gameDataQuestion.setEditable(false);							// Box ist nicht beschreibbar
 		background.add(gameDataQuestion);
 		
-		gameDataEvaluationDistance.setBounds(1060, 450, 300, 50);		// Textfeld Ausgabe Entfernung - Position & Größe
+		gameDataEvaluationDistance.setBounds(1060, 450, 300, 50);		// Textfeld Ausgabe Entfernung - Position & Grï¿½ï¿½e
 		gameDataEvaluationDistance.setText("");							// soll vorerst leer sein
-		gameDataEvaluationDistance.setFont(font);						// Schriftart & Größe wird aus bereits definierter font Variable übernommen
+		gameDataEvaluationDistance.setFont(font);						// Schriftart & Grï¿½ï¿½e wird aus bereits definierter font Variable ï¿½bernommen
 		gameDataEvaluationDistance.setBackground(getForeground());		// Hintergrundfarbe der Textbox
 		gameDataEvaluationDistance.setEditable(false);					// Box ist nicht beschreibbar
 		background.add(gameDataEvaluationDistance);
 		
-		gameDataEvaluationScore.setBounds(1060, 500, 300, 80);			// Textfeld Ausgabe Punkte - Position & Größe
+		gameDataEvaluationScore.setBounds(1060, 500, 300, 80);			// Textfeld Ausgabe Punkte - Position & Grï¿½ï¿½e
 		gameDataEvaluationScore.setText("");							// soll vorerst leer sein
-		gameDataEvaluationScore.setFont(font);							// Schriftart & Größe wird aus bereits definierter font Variable übernommen
+		gameDataEvaluationScore.setFont(font);							// Schriftart & Grï¿½ï¿½e wird aus bereits definierter font Variable ï¿½bernommen
 		gameDataEvaluationScore.setBackground(getForeground());			// Hintergrundfarbe der Textbox
 		gameDataEvaluationScore.setEditable(false);						// Box ist nicht beschreibbar
 		background.add(gameDataEvaluationScore);	
@@ -290,43 +292,43 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		
 		
 		
-		mainmenuButton = new JButton("Hauptmenü");						// Button zurück zum Hauptmenü
-		mainmenuButton.setBounds(1060, 800, 140, 50);					// Position und Größe des HMbuttons
+		mainmenuButton = new JButton("Hauptmenï¿½");						// Button zurï¿½ck zum Hauptmenï¿½
+		mainmenuButton.setBounds(1060, 800, 140, 50);					// Position und Grï¿½ï¿½e des HMbuttons
 		background.add(mainmenuButton);
 		
 		mainmenuButton.addActionListener(new ActionListener() {			
 			@Override
-			public void actionPerformed(ActionEvent e) {				// ActionListener Hauptmenübutton
-				final SwingMain sm = new SwingMain ();					// Klasse des Hauptmenüs
+			public void actionPerformed(ActionEvent e) {				// ActionListener Hauptmenï¿½button
+				final SwingMain sm = new SwingMain ();					// Klasse des Hauptmenï¿½s
 				sm.setVisible(true);									// Klasse wird sichtbar gemacht
 				dispose ();												// altes Fenster geschlossen
 				}
 			});
 		
 		beendenButton = new JButton("Beenden");							// Button zum beenden des Spiels
-		beendenButton.setBounds(1220, 800, 140, 50);					// Position und Größe des Beendenbuttons
+		beendenButton.setBounds(1220, 800, 140, 50);					// Position und Grï¿½ï¿½e des Beendenbuttons
 		background.add(beendenButton);
 		
-		beendenButton.addActionListener(new ActionListener() {			// ActionListener, drücken des Button beendet das Spiel
+		beendenButton.addActionListener(new ActionListener() {			// ActionListener, drï¿½cken des Button beendet das Spiel
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			dispose ();
 			}
 		});
 		
-		checkButton = new JButton("Spiel starten!");					// Button für Spielschritte wird deklariert
-		checkButton.setBounds(1060, 600, 300, 100);						// Position & Größe des Spielbuttons
+		checkButton = new JButton("Spiel starten!");					// Button fï¿½r Spielschritte wird deklariert
+		checkButton.setBounds(1060, 600, 300, 100);						// Position & Grï¿½ï¿½e des Spielbuttons
 		background.add(checkButton);
 		
-		checkButton.addActionListener(new ActionListener() {					// ActionListener: Wartet auf drücken des Spielbuttons
+		checkButton.addActionListener(new ActionListener() {					// ActionListener: Wartet auf drï¿½cken des Spielbuttons
 			@Override
-			public void actionPerformed(ActionEvent e) {						// Button wird gedrückt
-				if ((!hasNotClicked || currentRound == 1) && nextRound) {		// prüft ob, Marker gesetzt oder Spiel gerade startet und ob in der Auswertung oder nicht
+			public void actionPerformed(ActionEvent e) {						// Button wird gedrï¿½ckt
+				if ((!hasNotClicked || currentRound == 1) && nextRound) {		// prï¿½ft ob, Marker gesetzt oder Spiel gerade startet und ob in der Auswertung oder nicht
 					markerBlue.setVisible(false);								// Marker werden entfernt
 					markerRed.setVisible(false);
-					if (currentRound <= numberOfRounds) {						// prüfen ob Spiel beendet
-						checkButton.setText("Weiter...");						// Spielbutton Label wird geändert
-						gameDataEvaluationDistance.setText("");					// Textfeld Entfernung & Punkte werden gesäubert
+					if (currentRound <= numberOfRounds) {						// prï¿½fen ob Spiel beendet
+						checkButton.setText("Weiter...");						// Spielbutton Label wird geï¿½ndert
+						gameDataEvaluationDistance.setText("");					// Textfeld Entfernung & Punkte werden gesï¿½ubert
 						gameDataEvaluationScore.setText("");
 						gameAction(daten.cities);								
 						gameDataQuestionNumber.setText("Frage " + currentRound + ": ");
@@ -338,14 +340,14 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 					} else {												// Wenn Spiel beendet auswerten
 						auswertung();
 					}
-				} else {													// Marker nicht gesetzt	oder nicht nächste Runde
-					if (!nextRound && !hasNotClicked) {						// prüfen ob Marker gestzt und nicht nächste Runde gestartet
+				} else {													// Marker nicht gesetzt	oder nicht nï¿½chste Runde
+					if (!nextRound && !hasNotClicked) {						// prï¿½fen ob Marker gestzt und nicht nï¿½chste Runde gestartet
 						calcScore(Integer.parseInt(daten.cities[usedNumbers[currentRound - 2]][1]), Integer.parseInt(daten.cities[usedNumbers[currentRound - 2]][2]), Integer.parseInt(daten.cities[usedNumbers[currentRound - 2]][4]));
 						nextRound = true;									// Variable wird true gesetzt, um zu gameAction zu kommen
 						if (currentRound > numberOfRounds) {				// setzte Button Label anhand des Spielfortschritts 
-							checkButton.setText("Auswertung");				// Spiel vorbei: Auswertung, sonst nächste Runde
+							checkButton.setText("Auswertung");				// Spiel vorbei: Auswertung, sonst nï¿½chste Runde
 						} else {
-							checkButton.setText("Nächste Runde");						
+							checkButton.setText("Nï¿½chste Runde");						
 						}
 					}
 				}
@@ -353,12 +355,12 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		});
 		
 		
-		background.addMouseListener(this);								// MouseListener wird der Benutzeroberfläche (Hintergrund) zugefügt
+		background.addMouseListener(this);								// MouseListener wird der Benutzeroberflï¿½che (Hintergrund) zugefï¿½gt
 
 		//setUndecorated(true);											// Rahmen verschwindet
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 				// Anwendung wird komplett beendet, nicht nur das Fenster geschlossen
-	    setResizable(false);   											// Fenstergröße fest
+	    setResizable(false);   											// Fenstergrï¿½ï¿½e fest
 	    setVisible(true);												// Fenster wird sichbar
-	    setIconImage(SwingMain.iconGeoMaster.getImage());				// Fenster Icon geändert	    
+	    setIconImage(SwingMain.iconGeoMaster.getImage());				// Fenster Icon geï¿½ndert	    
    	}
 }
