@@ -1,7 +1,7 @@
 package org.geom.swing;
 
 
-//~~~~~~~~~~~~~~ Start / Hauptmenü ~~~~~~~~~~~~~~//
+//~~~~~~~~~~~~~~ Start / Hauptmenï¿½ ~~~~~~~~~~~~~~//
 
 
 import java.awt.BorderLayout;
@@ -26,14 +26,14 @@ public class SwingMain extends javax.swing.JFrame {
 	public static String userDir = System.getProperty("user.dir");
 	
 		
-	public  static Toolkit toolkitForWindow;											// Toolkit für AWT, wird benötigt um Displayauflösung abzurufen 
+	public  static Toolkit toolkitForWindow;											// Toolkit fï¿½r AWT, wird benï¿½tigt um DisplayauflÃ¶sung abzurufen 
 	public int  x = 0 , y = 0 , width = 1400, height = 900;								// Fenster-Variablen
 
 	private JButton startenButton;														// "Starten" Button Initialisierung
 	public JButton beendenButton;														// "Beenden" Button Initialisierung
 	
-	public String comboBoxKarte[] = {" - Spielkarte auswählen", " - Deutschland "," - Europa "};					//Kombobox Initialisierung zur Auswahl der Spielkarte
-	public String comboBoxLevel[] = {" - Schwierigkeitsgrad auswählen", " - leicht " , " - mittel ", " - schwer "};			//Kombobox Initialisierung zur Auswahl des Levels
+	public String comboBoxKarte[] = {" - Spielkarte auswï¿½hlen", " - Deutschland "," - Europa "};					//Kombobox Initialisierung zur Auswahl der Spielkarte
+	public String comboBoxLevel[] = {" - Schwierigkeitsgrad auswï¿½hlen", " - leicht " , " - mittel ", " - schwer "};			//Kombobox Initialisierung zur Auswahl des Levels
 	
 	public JOptionPane noSelection = new JOptionPane();
 
@@ -44,7 +44,7 @@ public class SwingMain extends javax.swing.JFrame {
 	public SwingMain() {
 				
 		SwingMain.toolkitForWindow = Toolkit.getDefaultToolkit();		
-		Dimension d = toolkitForWindow.getScreenSize();									// Fenster wird zentriert geöffnet
+		Dimension d = toolkitForWindow.getScreenSize();									// Fenster wird zentriert geï¿½ffnet
 		x = (int) ((d.getWidth() - width) / 2);	
 		y = (int) ((d.getHeight() - height)  / 2);
 		setTitle ("GEO Master");														// "FensterName"
@@ -52,26 +52,26 @@ public class SwingMain extends javax.swing.JFrame {
 		 
 	    System.out.println(userDir);
 	    
-	    setLayout(new BorderLayout());									// Layout für Hintergrund			
+	    setLayout(new BorderLayout());									// Layout fï¿½r Hintergrund			
 		JLabel background=new JLabel(new ImageIcon(getClass().getResource("Background_1400x900.jpg")));
-		add(background);												// Hintergrund einfügen
-		background.setLayout(null);										// Layout für weitere Elemente
+		add(background);												// Hintergrund einfï¿½gen
+		background.setLayout(null);										// Layout fï¿½r weitere Elemente
 		
 		
 		JComboBox<String> karteAuswahl = new JComboBox<>(comboBoxKarte);			// JComboBox Karte wird erstellt
-		background.add(karteAuswahl);									// JComboBox Karte wird backround hinzugefügt
-		karteAuswahl.setBounds(590, 600, 220, 30);						// Position und Größe der Kartenauswahl
+		background.add(karteAuswahl);									// JComboBox Karte wird backround hinzugefï¿½gt
+		karteAuswahl.setBounds(590, 600, 220, 30);						// Position und Grï¿½ï¿½e der Kartenauswahl
 		
 		JComboBox levelAuswahl = new JComboBox(comboBoxLevel);			// JComboBox Level wird erstellt
-		background.add(levelAuswahl);									// JComboBox Level wird backround hinzugefügt
-		levelAuswahl.setBounds(590, 640, 220, 30);						// Position und Größe der Levelauswahl
+		background.add(levelAuswahl);									// JComboBox Level wird backround hinzugefï¿½gt
+		levelAuswahl.setBounds(590, 640, 220, 30);						// Position und Grï¿½ï¿½e der Levelauswahl
 		
 		startenButton = new JButton("Starten");							// Button zum starten des Spiels
-		startenButton.setBounds(590, 680, 220, 80);						// Position und Größe des Startbuttons
+		startenButton.setBounds(590, 680, 220, 80);						// Position und Grï¿½ï¿½e des Startbuttons
 		background.add(startenButton);
 		
 		beendenButton = new JButton("Beenden");							// Button zum beenden des Spiels
-		beendenButton.setBounds(1220, 800, 140, 50);					// Position und Größe des Beendenbuttons
+		beendenButton.setBounds(1220, 800, 140, 50);					// Position und Grï¿½ï¿½e des Beendenbuttons
 		background.add(beendenButton);
 		
 		
@@ -80,10 +80,10 @@ public class SwingMain extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {			// ActionListener Startenbutton
 				String karte = (String) karteAuswahl.getSelectedItem();
 				String level = (String) levelAuswahl.getSelectedItem();
-				if (karte == " - Spielkarte auswählen" || level == " - Schwierigkeitsgrad auswählen") {
+				if (karte == " - Spielkarte auswï¿½hlen" || level == " - Schwierigkeitsgrad auswï¿½hlen") {
 		      		
-					noSelection.showMessageDialog(null, "Bitte Spielkarte und Level ausgewählen!", "Inkorrekte Auswahl", JOptionPane.INFORMATION_MESSAGE);
-					System.out.println ("Bitte Spielkarte und Level ausgewählen!");
+					noSelection.showMessageDialog(null, "Bitte Spielkarte und Level ausgewï¿½hlen!", "Inkorrekte Auswahl", JOptionPane.INFORMATION_MESSAGE);
+					System.out.println ("Bitte Spielkarte und Level ausgewï¿½hlen!");
 		      		
 			    }  else {
 			    	System.out.println (karte);
@@ -129,9 +129,9 @@ public class SwingMain extends javax.swing.JFrame {
 		 
 		//setUndecorated(true);												// Rahmen verschwindet
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 					// Anwendung wird komplett beendet, nicht nur das Fenster geschlossen
-	    setResizable(false);   												// Fenstergröße fest
+	    setResizable(false);   												// Fenstergrï¿½ï¿½e fest
 	    setVisible(true);
-	    setIconImage(iconGeoMaster.getImage());								// Fenster Icon geändert
+	    setIconImage(iconGeoMaster.getImage());								// Fenster Icon geï¿½ndert
 	}
 	
 	

@@ -20,7 +20,7 @@ public class CSVReader {
 	public CSVReader(String region, int level) throws ClassNotFoundException {
 
     	InputStream csvFile;															
-    	switch (region) {																	// Switch für Kartenauswahl
+    	switch (region) {																	// Switch fï¿½r Kartenauswahl
 	        case " - Deutschland ":															// CSV-Datei mit Namen+Koordinaten+Level GER
 	        	csvFile = SwingMain.class.getResourceAsStream("KoorGER.csv"); 		
 	        	break;
@@ -33,7 +33,7 @@ public class CSVReader {
     	
         String line = "";
         String cvsSplitBy = ";";														// Benutzt ";" als Seperator
-        String[][] cities = {{"", "", "", "", ""}};											// erstellt Array {Stadtname, x Koordinate, y Koordinate, Level, Verhälnis px:km}
+        String[][] cities = {{"", "", "", "", ""}};											// erstellt Array {Stadtname, x Koordinate, y Koordinate, Level, VerhÃ¤lnis px:km}
 
        
         
@@ -55,15 +55,15 @@ public class CSVReader {
                 	System.out.println("Level: >" + level + "<");
                 	System.out.println("Level (Ort): >" + city[2] + "<");
                 	if (level >= Integer.parseInt(city[2])) {
-	                	if (counter == 0) {													// Counter zur dynamischen Anpassung der Länge des Arrays
-	                    	cities[counter][0] = city[0];									// Zeile aus der CSV wird übernommen: StadtName
-	                    	cities[counter][1] = city[5];									// Zeile aus der CSV wird übernommen: x
-	                    	cities[counter][2] = city[6];									// Zeile aus der CSV wird übernommen: y
-	                    	cities[counter][3] = city[2];									// Zeile aus der CSV wird übernommen: Level
-	                    	cities[counter][4] = city[7];									// Zeile aus der CSV wird übernommen: px:km
+	                	if (counter == 0) {													// Counter zur dynamischen Anpassung der Lï¿½nge des Arrays
+	                    	cities[counter][0] = city[0];									// Zeile aus der CSV wird ï¿½bernommen: StadtName
+	                    	cities[counter][1] = city[5];									// Zeile aus der CSV wird ï¿½bernommen: x
+	                    	cities[counter][2] = city[6];									// Zeile aus der CSV wird ï¿½bernommen: y
+	                    	cities[counter][3] = city[2];									// Zeile aus der CSV wird ï¿½bernommen: Level
+	                    	cities[counter][4] = city[7];									// Zeile aus der CSV wird ï¿½bernommen: px:km
 	                    } else {
 	                    	int arraySize = counter;
-	                    	int newArraySize= counter + 1;									// Zeilenanzahl Array wird erhöht
+	                    	int newArraySize= counter + 1;									// Zeilenanzahl Array wird erhï¿½ht
 	                    	String[][] tempArray = new String[ newArraySize ][ 5 ];			// tempArray als Zwischenspeicher 
 	                    	for (int i=0; i < arraySize; i++) {
 	                    		tempArray[i][0] = cities[i][0];
@@ -72,19 +72,19 @@ public class CSVReader {
 	                    		tempArray[i][3] = cities[i][3];
 	                    		tempArray[i][4] = cities[i][4];
 	                    	}
-	                    	cities = tempArray;												// Array übernommen aus Zwischenspeicher
+	                    	cities = tempArray;												// Array ï¿½bernommen aus Zwischenspeicher
 	                    	cities[counter][0] = city[0];
 	                    	cities[counter][1] = city[5];
 	                    	cities[counter][2] = city[6];
 	                    	cities[counter][3] = city[2];
 	                    	cities[counter][4] = city[7];
 	                    }
-	                counter++;																// Counter wird erhöht um in die nächste Zeile zu kommen
+	                counter++;																// Counter wird erhï¿½ht um in die nï¿½chste Zeile zu kommen
 	                }
                 }
 
             }
-            this.cities = cities;															// Werte werden übergeben
+            this.cities = cities;															// Werte werden ï¿½bergeben
 
         } catch (IOException e) {
             e.printStackTrace();
