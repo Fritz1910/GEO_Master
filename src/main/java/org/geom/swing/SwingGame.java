@@ -202,8 +202,11 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		dispose ();													// aktuelles Fenster wird geschlossen
 	}
 	
-	//TODO
-	// Datens�tze aus CityArray zuf�llig ausw�hlen  
+	
+	/**Method, select data sets from CityArray randomly
+	 * @param round
+	 * @param cities
+	 */
 	public void setEntryNumber(int round, String[][] cities) {
 		
 		Random rNumber = new Random(); 								// neues Random Objekt, namens zufall
