@@ -1,9 +1,6 @@
 package org.geom.swing;
 
 
-//~~~~~~~~~~~~~~ CSVReader ~~~~~~~~~~~~~~//
-
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
@@ -13,6 +10,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 
+/**CSV-Reader class, reading csv-files and supplies the data to the game session.
+ * @author christoph.herrmann
+ * @since 1.0.0
+ */
 public class CSVReader {
 
     public String[][] cities = {{"", "", "", "", ""}};				// erstellt Array {Stadtname, x Koordinate, y Koordinate, Level}
@@ -40,7 +41,7 @@ public class CSVReader {
         
         
         try (
-             InputStreamReader isr = new InputStreamReader(csvFile, StandardCharsets.ISO_8859_1);	//read bitstream as (one) string with encoding-standard ISO...
+             InputStreamReader isr = new InputStreamReader(csvFile, StandardCharsets.UTF_8);	//read bitstream as (one) string with encoding-standard ISO...
         	 BufferedReader br = new BufferedReader(isr)) {	//split string line by line (see ) 
         	//catch (IOException e) {System.out.println("CSV error");};
         	

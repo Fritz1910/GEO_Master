@@ -1,8 +1,6 @@
 package org.geom.swing;
 
 
-//~~~~~~~~~~~~~~ Start / Hauptmen� ~~~~~~~~~~~~~~//
-
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -20,20 +18,24 @@ import javax.swing.JOptionPane;
 
 
 
+/**Main class, also delivering the main menu. In the main menu the player can select the game options (map, difficulty)
+ * @author christoph.herrmann
+ * @since 1.0.0
+ */
 public class SwingMain extends javax.swing.JFrame {
 	private static final long serialVersionUID = 9069118554859464281L;
 	
 	public static String userDir = System.getProperty("user.dir");
 	
 		
-	public  static Toolkit toolkitForWindow;											// Toolkit f�r AWT, wird ben�tigt um Displayauflösung abzurufen 
-	public int  x = 0 , y = 0 , width = 1400, height = 900;								// Fenster-Variablen
+	public  static Toolkit toolkitForWindow;										// Toolkit for AWT, needed to get monitor resolution
+	public int  x = 0 , y = 0 , width = 1400, height = 900;							// screen scale variables
 
-	private JButton startenButton;														// "Starten" Button Initialisierung
-	public JButton beendenButton;														// "Beenden" Button Initialisierung
+	private JButton startButton;													// "Starten" Button initialization
+	public JButton closeButton;														// "Beenden" Button initialization
 	
-	public String comboBoxKarte[] = {" - Spielkarte ausw�hlen", " - Deutschland "," - Europa "};					//Kombobox Initialisierung zur Auswahl der Spielkarte
-	public String comboBoxLevel[] = {" - Schwierigkeitsgrad ausw�hlen", " - leicht " , " - mittel ", " - schwer "};			//Kombobox Initialisierung zur Auswahl des Levels
+	public String comboBoxMap[] = {" - Spielkarte ausw�hlen", " - Deutschland "," - Europa "};						//Kombo box initialization to select game map
+	public String comboBoxLevel[] = {" - Schwierigkeitsgrad ausw�hlen", " - leicht " , " - mittel ", " - schwer "};	//Kombobox initialization to select game level
 	
 	public JOptionPane noSelection = new JOptionPane();
 
@@ -41,52 +43,57 @@ public class SwingMain extends javax.swing.JFrame {
 	public static ImageIcon iconGeoMasterDialog = new ImageIcon(SwingMain.class.getResource("Logo_v1.1_50x45.png"));
 	
 	
+	
+	/**Constructor of the class SwingMain, creates the main menu frame
+	 * @author christoph.herrmann
+	 * @since 1.0.0
+	 */
 	public SwingMain() {
 				
 		SwingMain.toolkitForWindow = Toolkit.getDefaultToolkit();		
-		Dimension d = toolkitForWindow.getScreenSize();									// Fenster wird zentriert ge�ffnet
+		Dimension d = toolkitForWindow.getScreenSize();				// window is opened in centered position
 		x = (int) ((d.getWidth() - width) / 2);	
 		y = (int) ((d.getHeight() - height)  / 2);
-		setTitle ("GEO Master");														// "FensterName"
+		setTitle ("GEO Master");									// window name
 	    setBounds(x, y, width, height);
 		 
 	    System.out.println(userDir);
 	    
-	    setLayout(new BorderLayout());									// Layout f�r Hintergrund			
+	    setLayout(new BorderLayout());									// Layout for background			
 		JLabel background=new JLabel(new ImageIcon(getClass().getResource("Background_1400x900.jpg")));
-		add(background);												// Hintergrund einf�gen
-		background.setLayout(null);										// Layout f�r weitere Elemente
+		add(background);												// insert background image
+		background.setLayout(null);										// Layout for further elements
 		
 		
-		JComboBox<String> karteAuswahl = new JComboBox<>(comboBoxKarte);			// JComboBox Karte wird erstellt
-		background.add(karteAuswahl);									// JComboBox Karte wird backround hinzugef�gt
-		karteAuswahl.setBounds(590, 600, 220, 30);						// Position und Gr��e der Kartenauswahl
+		JComboBox<String> mapSelection = new JComboBox<>(comboBoxMap);	// JComboBox create map
+		background.add(mapSelection);									// JComboBox map added to background
+		mapSelection.setBounds(590, 600, 220, 30);						// position and size of map-selection
 		
-		JComboBox levelAuswahl = new JComboBox(comboBoxLevel);			// JComboBox Level wird erstellt
-		background.add(levelAuswahl);									// JComboBox Level wird backround hinzugef�gt
-		levelAuswahl.setBounds(590, 640, 220, 30);						// Position und Gr��e der Levelauswahl
+		JComboBox levelSelection = new JComboBox(comboBoxLevel);		// JComboBox Level wird erstellt
+		background.add(levelSelection);									// JComboBox Level wird backround hinzugef�gt
+		levelSelection.setBounds(590, 640, 220, 30);					// Position und Gr��e der Levelauswahl
 		
-		startenButton = new JButton("Starten");							// Button zum starten des Spiels
-		startenButton.setBounds(590, 680, 220, 80);						// Position und Gr��e des Startbuttons
-		background.add(startenButton);
+		startButton = new JButton("Starten");							// Button zum starten des Spiels
+		startButton.setBounds(590, 680, 220, 80);						// Position und Gr��e des Startbuttons
+		background.add(startButton);
 		
-		beendenButton = new JButton("Beenden");							// Button zum beenden des Spiels
-		beendenButton.setBounds(1220, 800, 140, 50);					// Position und Gr��e des Beendenbuttons
-		background.add(beendenButton);
+		closeButton = new JButton("Beenden");							// Button zum beenden des Spiels
+		closeButton.setBounds(1220, 800, 140, 50);				  		// Position und Gr��e des Beendenbuttons
+		background.add(closeButton);
 		
 		
-		startenButton.addActionListener(new ActionListener() {
+		startButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {			// ActionListener Startenbutton
-				String karte = (String) karteAuswahl.getSelectedItem();
-				String level = (String) levelAuswahl.getSelectedItem();
-				if (karte == " - Spielkarte ausw�hlen" || level == " - Schwierigkeitsgrad ausw�hlen") {
+				String map = (String) mapSelection.getSelectedItem();
+				String level = (String) levelSelection.getSelectedItem();
+				if (map == " - Spielkarte auswählen" || level == " - Schwierigkeitsgrad ausw�hlen") {
 		      		
 					noSelection.showMessageDialog(null, "Bitte Spielkarte und Level ausgew�hlen!", "Inkorrekte Auswahl", JOptionPane.INFORMATION_MESSAGE);
 					System.out.println ("Bitte Spielkarte und Level ausgew�hlen!");
 		      		
 			    }  else {
-			    	System.out.println (karte);
+			    	System.out.println (map);
 			    	System.out.println (level);
 					
 			    	int levelnr = 0;									// Umwandlung Level String in int 
@@ -106,7 +113,7 @@ public class SwingMain extends javax.swing.JFrame {
 			    	
 					SwingGame ga = null;
 					try {
-						ga = new SwingGame (karte, levelnr);
+						ga = new SwingGame (map, levelnr);
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -119,7 +126,7 @@ public class SwingMain extends javax.swing.JFrame {
 		});
 		
 		
-    	beendenButton.addActionListener(new ActionListener() {				// Beenden Button schliesst Spiel
+    	closeButton.addActionListener(new ActionListener() {			// Beenden Button schliesst Spiel
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			dispose ();
@@ -127,14 +134,18 @@ public class SwingMain extends javax.swing.JFrame {
 		});
 	    
 		 
-		//setUndecorated(true);												// Rahmen verschwindet
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 					// Anwendung wird komplett beendet, nicht nur das Fenster geschlossen
-	    setResizable(false);   												// Fenstergr��e fest
+		//setUndecorated(true);											// Rahmen verschwindet
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 				// Anwendung wird komplett beendet, nicht nur das Fenster geschlossen
+	    setResizable(false);   											// Fenstergr��e fest
 	    setVisible(true);
-	    setIconImage(iconGeoMaster.getImage());								// Fenster Icon ge�ndert
+	    setIconImage(iconGeoMaster.getImage());							// Fenster Icon ge�ndert
 	}
 	
 	
+	/**Program origin, creates main menu frame (object) from class SwingMain when running. 
+	 * @author christoph.herrmann
+	 * @since 1.0.0
+	 */
 	public static void main(String [] args) {
 		new SwingMain();
 	}

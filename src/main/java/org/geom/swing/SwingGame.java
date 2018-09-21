@@ -1,9 +1,6 @@
 package org.geom.swing;
 
 
-//~~~~~~~~~~~~~~ Spielfenster ~~~~~~~~~~~~~~//
-
-
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +19,11 @@ import javax.swing.JTextPane;
 
 import java.util.Random;
 
+
+/**SwingGame class, generats a game frame based on the game options (map, difficulty) selected in the main menu. One game including 10 questions. After the final question the player gets a game result and returns to the main menu.
+ * @author christoph.herrmann
+ * @since 1.0.0
+ */
 public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	private static final long serialVersionUID = 9069118554859464282L;
 	//public  Toolkit t;
@@ -37,7 +39,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	public int score = 0;												// Punktzahl der einzelnen Runden
 	public int scoreTotal = 0;											// Summe der Punkte der einzelnen Runden
 	public int scoreMax = 0;											// Summe der maximal erreichbaren Punkte
-	public int toleranz = 2; 											// Toleranzbereich in px (Radius) f�r Berechnung der Punkte
+	public int tolerance = 2; 											// Toleranzbereich in px (Radius) f�r Berechnung der Punkte
 	private int[] usedNumbers = new int[numberOfRounds];
 	
 	private boolean hasNotClicked = true;								// Hilfsvariable Mausklick wurde f�r Berechnung
@@ -48,7 +50,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	public JLabel markerRed = new JLabel(new ImageIcon(SwingMain.class.getResource("Marker_Red.png")));			// Ziel-Marker
 		
 	public JButton mainmenuButton;										// "MainMen�" Button Initialisierung
-	public JButton beendenButton;										// "Beenden" Button Initialisierung
+	public JButton closeButton;										// "Beenden" Button Initialisierung
 	public JButton checkButton;											// "Spiel" Button zu Durchf�hren verschiedener Aktionen im Spielverlauf 
 	
 	public JTextPane gameDataQuestionNumber = new JTextPane();			// TextBox Ausgabe Frage Nummer
@@ -62,13 +64,14 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	   
 	//public ImageIcon iconGeoMaster = new ImageIcon(SwingMain.userDir + "\\src\\org\\geom\\swing\\Logo_v1.1_50x45.png");
 	
-	
+	//TODO
 	private void fillUsedNumberArrayWithDefault() {
 		for (int index = 0; index < this.numberOfRounds; index++) {
 			this.usedNumbers[index] = -1; 								// Array f�r benutze St�dte aus Liste 
 		}
 	}
 	
+	//TODO
 	@Override
 	public void mouseClicked(MouseEvent e) {							//  Methode Maus wurde gedr�ckt und wieder losgelassen
 			if (e.getX() < 1000) {										// Marker kann nur außerhalb der "Spielleiste" gesetzt werden.
@@ -117,6 +120,9 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 	}
         
 	
+	/**Method, creating the question-content for each round
+	 * @param cities
+	 */
 	public void gameAction(String[][] cities) {
 		if (currentRound == 1) {
 			gameHasStarted = true;
@@ -133,7 +139,11 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		hasNotClicked = true;
 	}
 	
-	// Berechnung der Entfernung und der Punkte
+	/**Method calculating distances and points
+	 * @param xTarget
+	 * @param yTarget
+	 * @param pxKmMulti
+	 */
 	public void calcScore(int xTarget, int yTarget, int pxKmMulti) {
 		
 		System.out.println(xTarget);
@@ -144,17 +154,17 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		markerRed.setVisible(true);								
 		markerRed.setLocation(xTarget - 13, yTarget - 43);			// Ziel-Marker wird auf Zielposition gesetzt 
 		
-		// Berechnung Entfernung
+		// Calculation distances
 		deltax = Math.abs(xTarget - xKoor);
 		deltay = Math.abs(yTarget - yKoor);
 		distancepx = (int) Math.sqrt(Math.pow(deltax, 2) + Math.pow(deltay, 2));	// Berechnung der Entfernug in Pixeln (Pythagoras)		
 		distancekm = distancepx * pxKmMulti;										// Umrechnung in km
 		
-		// Berechnung Punkte
-		if (distancepx <= toleranz) {					// Einbeziehung des Toleranzbereichs in die Punkteberechnung
+		// Calculation points
+		if (distancepx <= tolerance) {					// Einbeziehung des Toleranzbereichs in die Punkteberechnung
 			score = 100;								// maximal Punktzahl wird durch die Toleranz nicht erh�ht				
 		} else {
-			score = 100 + toleranz - distancepx;
+			score = 100 + tolerance - distancepx;
 		}
 		
 		if (score < 0) {								// Es soll keine negativen Punkte geben
@@ -163,7 +173,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		scoreTotal = scoreTotal + score;				// Berechnung der Gesamtpunktzahl
 		scoreMax = scoreMax + 100;						// Brechnung der maximal erreichbaren Punkte
 		
-		// Ausgabe der Entfernung & Punkte in Textbox 
+		// Output distances and points in text box
 		gameDataEvaluationDistance.setText("\n Die Entfernung betr�gt: " + distancekm + " km");
 		gameDataEvaluationScore.setText(" Diese Runde: " + score + " / 100 Punkte \n Insgesammt:  " + scoreTotal + " / " + scoreMax + " Punkte");
 		
@@ -171,12 +181,12 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		System.out.println(distancekm + " km");
 		System.out.println(score + "/100 Punkte");
 		System.out.println(scoreTotal + "/" + scoreMax + " Punkte");
-			
-		
 	}
 	
-	// Gesamtauswertung am Ende der letzten Runde, Ausgabe �ber Dialog-Fenster, Wechsel auf Hauptmen�-Fenster
-	public void auswertung() {										
+	/**Method, creating final game result (reached points/possible points). Results are visible in a dialoge box. Afterwards the program returns to the main menu.
+	 * 
+	 */
+	public void finalResult() {										
 		
 		gameHasStarted = false;										// Variable wird auf faslch gesetzt, da das Spiel beendet ist
 		markerBlue.setVisible(false);								// Marker sollen nicht mehr sichbar sein
@@ -192,6 +202,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		dispose ();													// aktuelles Fenster wird geschlossen
 	}
 	
+	//TODO
 	// Datens�tze aus CityArray zuf�llig ausw�hlen  
 	public void setEntryNumber(int round, String[][] cities) {
 		
@@ -218,14 +229,19 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 			
 		        
 		
-	public SwingGame(String karte, int level) throws ClassNotFoundException {
+	/**Konstruktor, generiert ein Spiel-Fenster auf Basis der im Spielmenü ausgewählten Optionen (Karte, Schwierigkeitsgrad)
+	 * @param karte: im Spielmenü ausgewählte Karte (Deutschland/Europa)
+	 * @param level: im Spielmenü ausgewählter Schwierigkeitsgrad
+	 * @throws ClassNotFoundException
+	 */
+	public SwingGame(String map, int level) throws ClassNotFoundException {
 		SwingMain.toolkitForWindow = Toolkit.getDefaultToolkit();		
 		
 		Dimension d =SwingMain.toolkitForWindow.getScreenSize();		// Informationen �ber Desktopaufl�sung werden aberufen
 		x = (int) ((d.getWidth() - width) / 2);							// Berechnung: Fenster soll zentriertauf Desktop ge�ffnet werden
 		y = (int) ((d.getHeight() - height)  / 2);
 		
-		CSVReader daten = new CSVReader(karte, level);					// Spieldaten vom CSVReader "abgerufen"
+		CSVReader daten = new CSVReader(map, level);					// Spieldaten vom CSVReader "abgerufen"
 		// System.out.println(daten.cities[0][0]);
 		
 		fillUsedNumberArrayWithDefault();
@@ -239,7 +255,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 
 	    JLabel background = new JLabel();				// Hintergrund wird definiert
 	    setLayout(new BorderLayout());					// Layout f�r Hintergrund			
-		switch (karte) {								// Switch f�r Kartenauswahl, Abgleich mit Auswahl in ComboBox im Hauptmen�
+		switch (map) {								// Switch f�r Kartenauswahl, Abgleich mit Auswahl in ComboBox im Hauptmen�
 			case " - Deutschland ":	
 				background = new JLabel(new ImageIcon(getClass().getResource("GameBackroundGER_1400x870.png")));
 				break;
@@ -305,11 +321,11 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 				}
 			});
 		
-		beendenButton = new JButton("Beenden");							// Button zum beenden des Spiels
-		beendenButton.setBounds(1220, 800, 140, 50);					// Position und Gr��e des Beendenbuttons
-		background.add(beendenButton);
+		closeButton = new JButton("Beenden");							// Button zum beenden des Spiels
+		closeButton.setBounds(1220, 800, 140, 50);					// Position und Gr��e des Beendenbuttons
+		background.add(closeButton);
 		
-		beendenButton.addActionListener(new ActionListener() {			// ActionListener, dr�cken des Button beendet das Spiel
+		closeButton.addActionListener(new ActionListener() {			// ActionListener, dr�cken des Button beendet das Spiel
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			dispose ();
@@ -338,7 +354,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 						
 						currentRound++;
 					} else {												// Wenn Spiel beendet auswerten
-						auswertung();
+						finalResult();
 					}
 				} else {													// Marker nicht gesetzt	oder nicht n�chste Runde
 					if (!nextRound && !hasNotClicked) {						// pr�fen ob Marker gestzt und nicht n�chste Runde gestartet
