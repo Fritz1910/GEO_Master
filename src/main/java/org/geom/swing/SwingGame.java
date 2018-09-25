@@ -134,7 +134,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		
 		System.out.println("Frage " + roundString + ": ");
 		System.out.println("Wo befindet sich " + cities[usedNumbers[currentRound - 1]][0] + "?");
-		System.out.println("Bitte Position w�hlen!");
+		System.out.println("Bitte Position wählen!");
 		
 		hasNotClicked = true;
 	}
@@ -174,7 +174,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		scoreMax = scoreMax + 100;						// Brechnung der maximal erreichbaren Punkte
 		
 		// Output distances and points in text box
-		gameDataEvaluationDistance.setText("\n Die Entfernung betr�gt: " + distancekm + " km");
+		gameDataEvaluationDistance.setText("\n Die Entfernung beträgt: " + distancekm + " km");
 		gameDataEvaluationScore.setText(" Diese Runde: " + score + " / 100 Punkte \n Insgesammt:  " + scoreTotal + " / " + scoreMax + " Punkte");
 		
 		System.out.println(distancepx + " px");		
@@ -193,7 +193,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		markerRed.setVisible(false);
 		
 		// Ausgabe Dialog Spielauswertung 
-		finalEvaluation.showMessageDialog(null, "\n Spiel beendet! " + scoreTotal + " von " + scoreMax + " m�glichen Punkten \n ", "Auswertung", JOptionPane.INFORMATION_MESSAGE, SwingMain.iconGeoMasterDialog);
+		finalEvaluation.showMessageDialog(null, "\n Spiel beendet! " + scoreTotal + " von " + scoreMax + " möglichen Punkten \n ", "Auswertung", JOptionPane.INFORMATION_MESSAGE, SwingMain.iconGeoMasterDialog);
 		System.out.println("Spiel beendet! \" + scoreTotal + \" von \" + scoreMax + \" m�glichen Punkten");
 		
 		// zur�ck zum Hauptmen�
@@ -311,7 +311,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 		
 		
 		
-		mainmenuButton = new JButton("Hauptmen�");						// Button zur�ck zum Hauptmen�
+		mainmenuButton = new JButton("Hauptmenü");						// Button zur�ck zum Hauptmen�
 		mainmenuButton.setBounds(1060, 800, 140, 50);					// Position und Gr��e des HMbuttons
 		background.add(mainmenuButton);
 		
@@ -366,7 +366,7 @@ public class SwingGame extends javax.swing.JFrame implements MouseListener {
 						if (currentRound > numberOfRounds) {				// setzte Button Label anhand des Spielfortschritts 
 							checkButton.setText("Auswertung");				// Spiel vorbei: Auswertung, sonst n�chste Runde
 						} else {
-							checkButton.setText("N�chste Runde");						
+							checkButton.setText("Nächste Runde");						
 						}
 					}
 				}

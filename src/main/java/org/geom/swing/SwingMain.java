@@ -34,8 +34,8 @@ public class SwingMain extends javax.swing.JFrame {
 	private JButton startButton;													// "Starten" Button initialization
 	public JButton closeButton;														// "Beenden" Button initialization
 	
-	public String comboBoxMap[] = {" - Spielkarte ausw�hlen", " - Deutschland "," - Europa "};						//Kombo box initialization to select game map
-	public String comboBoxLevel[] = {" - Schwierigkeitsgrad ausw�hlen", " - leicht " , " - mittel ", " - schwer "};	//Kombobox initialization to select game level
+	public String comboBoxMap[] = {" - Spielkarte auswählen", " - Deutschland "," - Europa "};						//Combobox initialization to select game map
+	public String comboBoxLevel[] = {" - Schwierigkeitsgrad auswählen", " - leicht " , " - mittel ", " - schwer "};	//Combobox initialization to select game level
 	
 	public JOptionPane noSelection = new JOptionPane();
 
@@ -69,34 +69,34 @@ public class SwingMain extends javax.swing.JFrame {
 		background.add(mapSelection);									// JComboBox map added to background
 		mapSelection.setBounds(590, 600, 220, 30);						// position and size of map-selection
 		
-		JComboBox levelSelection = new JComboBox(comboBoxLevel);		// JComboBox Level wird erstellt
-		background.add(levelSelection);									// JComboBox Level wird backround hinzugef�gt
-		levelSelection.setBounds(590, 640, 220, 30);					// Position und Gr��e der Levelauswahl
+		JComboBox levelSelection = new JComboBox(comboBoxLevel);		// JComboBox create Level
+		background.add(levelSelection);									// JComboBox add Level to background
+		levelSelection.setBounds(590, 640, 220, 30);					// Position and size of level-selection
 		
-		startButton = new JButton("Starten");							// Button zum starten des Spiels
-		startButton.setBounds(590, 680, 220, 80);						// Position und Gr��e des Startbuttons
+		startButton = new JButton("Starten");							// Start button
+		startButton.setBounds(590, 680, 220, 80);						// Position and size of start button
 		background.add(startButton);
 		
-		closeButton = new JButton("Beenden");							// Button zum beenden des Spiels
-		closeButton.setBounds(1220, 800, 140, 50);				  		// Position und Gr��e des Beendenbuttons
+		closeButton = new JButton("Beenden");							// Button to close the game
+		closeButton.setBounds(1220, 800, 140, 50);				  		// Position and size of closeButton
 		background.add(closeButton);
 		
 		
 		startButton.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {			// ActionListener Startenbutton
+			public void actionPerformed(ActionEvent e) {				// ActionListener start button
 				String map = (String) mapSelection.getSelectedItem();
 				String level = (String) levelSelection.getSelectedItem();
-				if (map == " - Spielkarte auswählen" || level == " - Schwierigkeitsgrad ausw�hlen") {
+				if (map == " - Spielkarte auswählen" || level == " - Schwierigkeitsgrad auswählen") {
 		      		
-					noSelection.showMessageDialog(null, "Bitte Spielkarte und Level ausgew�hlen!", "Inkorrekte Auswahl", JOptionPane.INFORMATION_MESSAGE);
-					System.out.println ("Bitte Spielkarte und Level ausgew�hlen!");
+					noSelection.showMessageDialog(null, "Bitte Spielkarte und Level ausgewählen!", "Inkorrekte Auswahl", JOptionPane.INFORMATION_MESSAGE);
+					System.out.println ("Bitte Spielkarte und Level ausgewählen!");
 		      		
 			    }  else {
 			    	System.out.println (map);
 			    	System.out.println (level);
 					
-			    	int levelnr = 0;									// Umwandlung Level String in int 
+			    	int levelnr = 0;									// Chancing Level-Type string to int
 			    	switch(level) {
 			    		case " - leicht ":
 			    			levelnr = 1;
@@ -109,7 +109,7 @@ public class SwingMain extends javax.swing.JFrame {
 			    			break;
 			    	}
 			    	
-			    	System.out.println (levelnr);						// Kontrolle..
+			    	System.out.println (levelnr);						// control
 			    	
 					SwingGame ga = null;
 					try {
@@ -118,15 +118,15 @@ public class SwingMain extends javax.swing.JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}		// Klasse des Spielfensters
-					ga.setVisible(true);								// Fenster wird sichtbar
-					dispose ();											// altes Fenster geschlossen					
+					ga.setVisible(true);								// make window visible
+					dispose ();											// close old window				
 			      	
 			  	}
 			}
 		});
 		
 		
-    	closeButton.addActionListener(new ActionListener() {			// Beenden Button schliesst Spiel
+    	closeButton.addActionListener(new ActionListener() {			// closeButton closes the game
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			dispose ();
@@ -134,11 +134,11 @@ public class SwingMain extends javax.swing.JFrame {
 		});
 	    
 		 
-		//setUndecorated(true);											// Rahmen verschwindet
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 				// Anwendung wird komplett beendet, nicht nur das Fenster geschlossen
-	    setResizable(false);   											// Fenstergr��e fest
+		//setUndecorated(true);											// frame invisible
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 				// closing the complete application not just the window
+	    setResizable(false);   											// constant window size
 	    setVisible(true);
-	    setIconImage(iconGeoMaster.getImage());							// Fenster Icon ge�ndert
+	    setIconImage(iconGeoMaster.getImage());							// window icon
 	}
 	
 	

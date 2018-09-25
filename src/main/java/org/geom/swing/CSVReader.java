@@ -16,16 +16,16 @@ import java.nio.charset.StandardCharsets;
  */
 public class CSVReader {
 
-    public String[][] cities = {{"", "", "", "", ""}};				// erstellt Array {Stadtname, x Koordinate, y Koordinate, Level}
+    public String[][] cities = {{"", "", "", "", ""}};				// creates array {City name, x coordinate, y coordinate, Level}
 	
 	public CSVReader(String region, int level) throws ClassNotFoundException {
 
     	InputStream csvFile;															
-    	switch (region) {																	// Switch f�r Kartenauswahl
-	        case " - Deutschland ":															// CSV-Datei mit Namen+Koordinaten+Level GER
+    	switch (region) {																// Switch for map selection
+	        case " - Deutschland ":														// CSV-file with city names + coordinates + levels GER
 	        	csvFile = SwingMain.class.getResourceAsStream("KoorGER.csv"); 		
 	        	break;
-	        case " - Europa ":																// CSV-Datei mit Namen+Koordinaten+Level EU
+	        case " - Europa ":															// CSV-file with city names + coordinates + levels EU
 	        	csvFile = SwingMain.class.getResourceAsStream("KoorEUR.csv");		
 	        	break;
 	        default :
@@ -33,15 +33,15 @@ public class CSVReader {
         }
     	
         String line = "";
-        String cvsSplitBy = ";";														// Benutzt ";" als Seperator
-        String[][] cities = {{"", "", "", "", ""}};											// erstellt Array {Stadtname, x Koordinate, y Koordinate, Level, Verhälnis px:km}
+        String cvsSplitBy = ";";														//  ";" as separator
+        String[][] cities = {{"", "", "", "", ""}};										// creates array {city name, x coordinate, y coordinate, Level, relation px:km}
 
        
         
         
         
         try (
-             InputStreamReader isr = new InputStreamReader(csvFile, StandardCharsets.UTF_8);	//read bitstream as (one) string with encoding-standard ISO...
+             InputStreamReader isr = new InputStreamReader(csvFile, StandardCharsets.UTF_8);	//read bitstream as (one) string with encoding-standard UTF_8
         	 BufferedReader br = new BufferedReader(isr)) {	//split string line by line (see ) 
         	//catch (IOException e) {System.out.println("CSV error");};
         	
@@ -51,21 +51,21 @@ public class CSVReader {
                
                 String[] city = line.split(cvsSplitBy);
                 System.out.println("");
-                if (city[0] != "Stadt") {													// Filtert Kopfzeile aus Tabelle heraus
+                if (city[0] != "Stadt") {													// filters headline from table
                 	System.out.println("Stadt: >" + city[0] + "<");
                 	System.out.println("Level: >" + level + "<");
                 	System.out.println("Level (Ort): >" + city[2] + "<");
                 	if (level >= Integer.parseInt(city[2])) {
-	                	if (counter == 0) {													// Counter zur dynamischen Anpassung der L�nge des Arrays
-	                    	cities[counter][0] = city[0];									// Zeile aus der CSV wird �bernommen: StadtName
-	                    	cities[counter][1] = city[5];									// Zeile aus der CSV wird �bernommen: x
-	                    	cities[counter][2] = city[6];									// Zeile aus der CSV wird �bernommen: y
-	                    	cities[counter][3] = city[2];									// Zeile aus der CSV wird �bernommen: Level
-	                    	cities[counter][4] = city[7];									// Zeile aus der CSV wird �bernommen: px:km
+	                	if (counter == 0) {													// Counter for dynamic adaption of the array length
+	                    	cities[counter][0] = city[0];									// take line from the CSV: StadtName
+	                    	cities[counter][1] = city[5];									// take line from the CSV:: x
+	                    	cities[counter][2] = city[6];									// take line from the CSV:: y
+	                    	cities[counter][3] = city[2];									// take line from the CSV:: Level
+	                    	cities[counter][4] = city[7];									// take line from the CSV:: px:km
 	                    } else {
 	                    	int arraySize = counter;
-	                    	int newArraySize= counter + 1;									// Zeilenanzahl Array wird erh�ht
-	                    	String[][] tempArray = new String[ newArraySize ][ 5 ];			// tempArray als Zwischenspeicher 
+	                    	int newArraySize= counter + 1;									// increment line number
+	                    	String[][] tempArray = new String[ newArraySize ][ 5 ];			// tempArray as buffer 
 	                    	for (int i=0; i < arraySize; i++) {
 	                    		tempArray[i][0] = cities[i][0];
 	                    		tempArray[i][1] = cities[i][1];
@@ -73,19 +73,19 @@ public class CSVReader {
 	                    		tempArray[i][3] = cities[i][3];
 	                    		tempArray[i][4] = cities[i][4];
 	                    	}
-	                    	cities = tempArray;												// Array �bernommen aus Zwischenspeicher
+	                    	cities = tempArray;												// take array from buffer
 	                    	cities[counter][0] = city[0];
 	                    	cities[counter][1] = city[5];
 	                    	cities[counter][2] = city[6];
 	                    	cities[counter][3] = city[2];
 	                    	cities[counter][4] = city[7];
 	                    }
-	                counter++;																// Counter wird erh�ht um in die n�chste Zeile zu kommen
+	                counter++;																// increment counter to go to the next line
 	                }
                 }
 
             }
-            this.cities = cities;															// Werte werden �bergeben
+            this.cities = cities;															// assume values
 
         } catch (IOException e) {
             e.printStackTrace();
