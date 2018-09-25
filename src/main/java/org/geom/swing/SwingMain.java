@@ -117,7 +117,7 @@ public class SwingMain extends javax.swing.JFrame {
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}		// Klasse des Spielfensters
+					}		
 					ga.setVisible(true);								// make window visible
 					dispose ();											// close old window				
 			      	
@@ -134,7 +134,7 @@ public class SwingMain extends javax.swing.JFrame {
 		});
 	    
 		 
-		//setUndecorated(true);											// frame invisible
+		
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 				// closing the complete application not just the window
 	    setResizable(false);   											// constant window size
 	    setVisible(true);

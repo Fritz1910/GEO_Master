@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class CSVReader {
 
-    public String[][] cities = {{"", "", "", "", ""}};				// creates array {City name, x coordinate, y coordinate, Level}
+    public String[][] cities = {{"", "", "", "", ""}};									// creates array {City name, x coordinate, y coordinate, Level}
 	
 	public CSVReader(String region, int level) throws ClassNotFoundException {
 
@@ -42,8 +42,7 @@ public class CSVReader {
         
         try (
              InputStreamReader isr = new InputStreamReader(csvFile, StandardCharsets.UTF_8);	//read bitstream as (one) string with encoding-standard UTF_8
-        	 BufferedReader br = new BufferedReader(isr)) {	//split string line by line (see ) 
-        	//catch (IOException e) {System.out.println("CSV error");};
+        	 BufferedReader br = new BufferedReader(isr)) {										//split string line by line (see ) 
         	
         	int counter = 0;
             while ((line = br.readLine()) != null) {
